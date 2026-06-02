@@ -1,0 +1,24 @@
+{
+  "name": "cs361-main-program-ramirez",
+  "version": "1.0.0",
+  "description": "Main program repository for CS 361 - Milestone #1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenzin-4776/cs361-main-program-Ramirez.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tenzin-4776/cs361-main-program-Ramirez/issues"
+  },
+  "homepage": "https://github.com/tenzin-4776/cs361-main-program-Ramirez#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "multer": "^2.1.1"
+  }
+}
