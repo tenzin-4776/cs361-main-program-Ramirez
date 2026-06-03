@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Creator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <button onclick="showScreen('dashboard')">Dashboard</button>
+    <button onclick="showScreen('upload')">Upload</button>
+    <button onclick="showScreen('media')">Media</button>
+    <button onclick="showScreen('preview')">Preview</button>
+  </nav>
+
+  <main>
+    <section id="dashboard" class="screen active">
+      <h1>Video Creator</h1>
+      <p>Create a video from your photos and clips in minutes.</p>
+      <p class="note">Adding media usually takes less than 1 minute. Unsaved projects will be lost if you do not save.</p>
+      <button onclick="showScreen('upload')">Upload Media</button>
+    </section>
+
+    <section id="upload" class="screen">
+      <h2>Upload Media</h2>
+      <p>Supported file types: JPG, PNG, MP4.</p>
+      <input type="file" id="mediaInput" multiple accept=".jpg,.jpeg,.png,.mp4">
+      <button onclick="uploadMedia()">Upload Files</button>
+      <p id="uploadMessage"></p>
+      <button onclick="showScreen('media')">View Media List</button>
+    </section>
+
+    <section id="media" class="screen">
+      <h2>Media List</h2>
+      <input type="text" id="searchInput" placeholder="Search uploaded media..." oninput="renderMediaList()">
+      <div id="mediaList"></div>
+      <button onclick="startPreview()">Preview Video</button>
+      <button onclick="saveProject()">Save Project</button>
+    </section>
+
+    <section id="preview" class="screen">
+      <h2>Preview Video</h2>
+      <div id="previewArea">No media selected yet.</div>
+      <p id="nowPlaying"></p>
+      <button onclick="playPreview()">Play</button>
+      <button onclick="pausePreview()">Pause</button>
+      <button onclick="replayPreview()">Replay</button>
+      <button onclick="showScreen('media')">Back</button>
+    </section>
+
+    <section id="save" class="screen">
+      <h2>Save Project</h2>
+      <p class="success">Project Saved Successfully!</p>
+      <button onclick="showScreen('dashboard')">Return to Dashboard</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
