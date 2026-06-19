@@ -138,7 +138,7 @@ print(response)
 
 ## UML Diagram
 
-![UML Diagram](uml_diagram.jpg)
+![UML Diagram](microserviceA/uml_diagram.jpg)
 
 
 
