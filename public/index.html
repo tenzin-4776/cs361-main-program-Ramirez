@@ -10,6 +10,7 @@
     <button onclick="showScreen('upload')">Upload</button>
     <button onclick="showScreen('media')">Media</button>
     <button onclick="showScreen('preview')">Preview</button>
+    <button onclick="showScreen('microservices')">Video Tools</button>
   </nav>
 
   <main>
@@ -46,6 +47,34 @@
       <button onclick="replayPreview()">Replay</button>
       <button onclick="showScreen('media')">Back</button>
     </section>
+
+<section id="microservices" class="screen">
+  <h2>Video Creation Tools</h2>
+  <p>Use these tools to choose music, select a template, generate transition timing, and export your video project.</p>
+  <p class="note">These tools are powered by separate microservices that communicate with the main program through ZeroMQ.</p>
+
+  <label for="themeInput">Video Theme:</label>
+  <input type="text" id="themeInput" value="adventure">
+
+  <div>
+    <button onclick="getMusicRecommendations()">Add Music</button>
+    <button onclick="getTemplateRecommendations()">Apply Template</button>
+    <button onclick="generateTransitions()">Generate Transitions</button>
+    <button onclick="exportVideo()">Export Video</button>
+  </div>
+
+  <h3>Current Video Project</h3>
+  <div id="projectSummary" class="project-card">
+    <p><strong>Theme:</strong> <span id="summaryTheme">Adventure</span></p>
+    <p><strong>Music:</strong> <span id="summaryMusic">Not selected</span></p>
+    <p><strong>Template:</strong> <span id="summaryTemplate">Not selected</span></p>
+    <p><strong>Transitions:</strong> <span id="summaryTransitions">Not generated</span></p>
+    <p><strong>Export Status:</strong> <span id="summaryExport">Not exported</span></p>
+  </div>
+
+  <h3>Microservice Response</h3>
+  <pre id="microserviceOutput">No video tool has been used yet.</pre>
+</section>
 
     <section id="save" class="screen">
       <h2>Save Project</h2>

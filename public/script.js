@@ -162,4 +162,108 @@ async function loadProject() {
   renderMediaList();
 }
 
-window.onload = loadProject;
+/* ===========================
+   Microservice Integration
+=========================== */
+
+function showMicroserviceOutput(data) {
+  const output = document.getElementById("microserviceOutput");
+  output.textContent = JSON.stringify(data, null, 2);
+}
+
+function getTheme() {
+  return document.getElementById("themeInput")?.value || "adventure";
+}
+
+function updateThemeSummary() {
+  document.getElementById("summaryTheme").textContent = getTheme();
+}
+
+async function getMusicRecommendations() {
+  updateThemeSummary();
+
+  const response = await fetch("/music-recommendations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ theme: getTheme() })
+  });
+
+  const data = await response.json();
+
+  let music = "Adventure Background Track";
+
+  if (Array.isArray(data.recommendations) && data.recommendations.length > 0) {
+    music = data.recommendations[0];
+  } else if (Array.isArray(data.music) && data.music.length > 0) {
+    music = data.music[0];
+  }
+
+  document.getElementById("summaryMusic").textContent = music;
+  showMicroserviceOutput(data);
+}
+
+async function getTemplateRecommendations() {
+  updateThemeSummary();
+
+  const response = await fetch("/template-recommendations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ theme: getTheme() })
+  });
+
+  const data = await response.json();
+
+  let template = "Adventure Highlight Reel";
+
+  if (Array.isArray(data.templates) && data.templates.length > 0) {
+    template = data.templates[0].name || data.templates[0];
+  }
+
+  document.getElementById("summaryTemplate").textContent = template;
+  showMicroserviceOutput(data);
+}
+
+async function generateTransitions() {
+  updateThemeSummary();
+
+  let mediaItems = projectFiles.map(file => file.name);
+
+  if (mediaItems.length === 0) {
+    mediaItems = ["intro.jpg", "adventure-clip.mp4", "ending.jpg"];
+  }
+
+  const response = await fetch("/transition-timing", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ mediaItems })
+  });
+
+  const data = await response.json();
+
+  document.getElementById("summaryTransitions").textContent =
+    `Generated for ${mediaItems.length} media item(s)`;
+
+  showMicroserviceOutput(data);
+}
+
+async function exportVideo() {
+  updateThemeSummary();
+
+  const response = await fetch("/export-video", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      projectName: `${getTheme()}-video-project`,
+      aspectRatio: "16:9"
+    })
+  });
+
+  const data = await response.json();
+
+  document.getElementById("summaryExport").textContent =
+    data.success ? "Ready / Export complete" : "Export requested";
+
+  showMicroserviceOutput(data);
+}
+
+window.onload = loadProject; 
