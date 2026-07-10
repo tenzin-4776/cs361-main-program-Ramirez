@@ -166,11 +166,6 @@ async function loadProject() {
    Microservice Integration
 =========================== */
 
-function showMicroserviceOutput(data) {
-  const output = document.getElementById("microserviceOutput");
-  output.textContent = JSON.stringify(data, null, 2);
-}
-
 function getTheme() {
   return document.getElementById("themeInput")?.value || "adventure";
 }
@@ -199,7 +194,6 @@ async function getMusicRecommendations() {
   }
 
   document.getElementById("summaryMusic").textContent = music;
-  showMicroserviceOutput(data);
 }
 
 async function getTemplateRecommendations() {
@@ -220,7 +214,6 @@ async function getTemplateRecommendations() {
   }
 
   document.getElementById("summaryTemplate").textContent = template;
-  showMicroserviceOutput(data);
 }
 
 async function generateTransitions() {
@@ -243,7 +236,6 @@ async function generateTransitions() {
   document.getElementById("summaryTransitions").textContent =
     `Generated for ${mediaItems.length} media item(s)`;
 
-  showMicroserviceOutput(data);
 }
 
 async function exportVideo() {
@@ -263,7 +255,6 @@ async function exportVideo() {
   document.getElementById("summaryExport").textContent =
     data.success ? "Ready / Export complete" : "Export requested";
 
-  showMicroserviceOutput(data);
 }
 
 window.onload = loadProject; 
